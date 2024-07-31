@@ -75,7 +75,7 @@ dns_yandex360_rm() {
 
   record_id=$(
     echo "$response" |
-      _egrep_o '{[^}]*'"${txtvalue}"'[^}]*}' |
+      _egrep_o '\{[^}]*'"${txtvalue}"'[^}]*\}' |
       _egrep_o '"recordId":[0-9]*' |
       cut -d':' -f2
   )
@@ -341,7 +341,7 @@ _get_root() {
 
     for d in $domain_names; do
       d="$(_idn "$d")"
-      _debug "Checking domain" "$d"
+      _debug 'Checking domain' "$d"
 
       if _endswith "$domain" "$d"; then
         root_domain="$d"
